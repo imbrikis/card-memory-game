@@ -7,7 +7,6 @@ const CardsContainer = () => {
     cards.push(<Card />)
   }
 
-  console.log(cards)
   return (
     <div className='w-full flex-grow'>
       <div className='h-full mx-auto grid grid-cols-6 grid-rows-3'>{cards}</div>
