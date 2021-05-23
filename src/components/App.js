@@ -1,9 +1,10 @@
 import React from 'react'
+import Game from './Game'
 
 const App = () => {
   return (
     <div>
-      <h1>React and Tailwind App Template</h1>
+      <Game />
     </div>
   )
 }
