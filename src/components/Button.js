@@ -2,7 +2,7 @@ import React from 'react'
 
 const Button = () => {
   return (
-    <div className='inline-block w-72 h-20 rounded-xl bg-green text-5xl flex justify-center items-center cursor-pointer'>
+    <div className='inline-block w-72 h-16 rounded-xl bg-green text-4xl flex justify-center items-center cursor-pointer'>
       START
     </div>
   )

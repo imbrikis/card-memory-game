@@ -4,3 +4,31 @@
 
 /* FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.card-front {
+  perspective: 150rem;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
+
+.card-back {
+  perspective: 150rem;
+  transform: rotateY(-180deg);
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
+
+.clicked-card-front {
+  perspective: 150rem;
+  transform: rotateY(-180deg);
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
+
+.clicked-card-back {
+  perspective: 150rem;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
