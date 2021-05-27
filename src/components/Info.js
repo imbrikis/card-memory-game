@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CardsContext } from './CardsContext'
 
-const Info = ({ gameIsInProgress }) => {
+const Info = () => {
+  const [gameIsInProgress] = useContext(CardsContext)
+
   return (
     <div className='h-20 w-full flex justify-center items-center'>
       <h1 className='text-6xl'>

@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { shuffleCards } from './ShuffleCards'
+import { CardsContext } from './CardsContext'
 
-const Button = ({ startGame, gameIsInProgress }) => {
+const Button = ({ startGame }) => {
+  const [cards, setCards] = useContext(CardsContext)
+  const [gameIsInProgress] = useContext(CardsContext)
+
   const handleClick = () => {
-    !gameIsInProgress && startGame()
+    if (!gameIsInProgress) {
+      let shuffledCards = shuffleCards()
+      setCards(shuffledCards)
+      startGame()
+    }
   }
 
   return (
