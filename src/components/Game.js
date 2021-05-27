@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Timer from './Timer'
 import Button from './Button'
 import CardsContainer from './CardsContainer'
@@ -6,11 +6,9 @@ import Info from './Info'
 import { CardsProvider } from './CardsContext'
 
 const Game = () => {
-  const [gameIsInProgress, setGameIsInProgress] = useState(false)
   const [initiateTimer, setInitiateTimer] = useState(false)
 
   const startGame = () => {
-    setGameIsInProgress(true)
     setInitiateTimer(true)
   }
 

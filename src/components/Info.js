@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import { CardsContext } from './CardsContext'
 
 const Info = () => {
-  const [gameIsInProgress] = useContext(CardsContext)
+  const { _gameIsInProgress } = useContext(CardsContext)
+  const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
 
   return (
     <div className='h-20 w-full flex justify-center items-center'>

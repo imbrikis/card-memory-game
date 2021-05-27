@@ -3,11 +3,14 @@ import Card from './Card'
 import { CardsContext } from './CardsContext'
 
 const CardsContainer = () => {
-  const [cards] = useContext(CardsContext)
+  const { _cards } = useContext(CardsContext)
+  const [cards, setCards] = _cards
 
   const cardsPlaceholder = []
 
-  if (!cards) {
+  console.log(cards)
+
+  if (!cards || cards.length === 0) {
     for (let x = 0; x < 18; x++) {
       cardsPlaceholder.push(
         <Card key={Math.floor(Math.random() * 1000000) + 1} />

@@ -5,15 +5,15 @@ export const CardsContext = createContext()
 export const CardsProvider = ({ children }) => {
   const [cards, setCards] = useState([])
   const [gameIsInProgress, setGameIsInProgress] = useState(false)
-  const [chosenCards, setChosenCards] = useState(0)
+  const [flippedCards, setFlippedCards] = useState([])
 
   return (
     <CardsContext.Provider
-      value={
-        ([cards, setCards],
-        [gameIsInProgress, setGameIsInProgress],
-        [chosenCards, setChosenCards])
-      }
+      value={{
+        _cards: [cards, setCards],
+        _gameIsInProgress: [gameIsInProgress, setGameIsInProgress],
+        _flippedCards: [flippedCards, setFlippedCards],
+      }}
     >
       {children}
     </CardsContext.Provider>

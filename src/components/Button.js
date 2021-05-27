@@ -3,11 +3,14 @@ import { shuffleCards } from './ShuffleCards'
 import { CardsContext } from './CardsContext'
 
 const Button = ({ startGame }) => {
-  const [cards, setCards] = useContext(CardsContext)
-  const [gameIsInProgress] = useContext(CardsContext)
+  const { _cards } = useContext(CardsContext)
+  const [cards, setCards] = _cards
+  const { _gameIsInProgress } = useContext(CardsContext)
+  const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
 
   const handleClick = () => {
     if (!gameIsInProgress) {
+      setGameIsInProgress(true)
       let shuffledCards = shuffleCards()
       setCards(shuffledCards)
       startGame()
