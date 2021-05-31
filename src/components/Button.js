@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { shuffleCards } from './ShuffleCards'
 import { CardsContext } from './CardsContext'
 
-const Button = ({ startGame }) => {
+const Button = ({ startGame, wonGame, isOutOfTime }) => {
   const { _cards } = useContext(CardsContext)
   const [cards, setCards] = _cards
   const { _gameIsInProgress } = useContext(CardsContext)
@@ -26,7 +26,11 @@ const Button = ({ startGame }) => {
       }`}
       onClick={handleClick}
     >
-      {!gameIsInProgress ? 'START' : 'IN PROGRESS'}
+      {!gameIsInProgress
+        ? 'START'
+        : (gameIsInProgress && wonGame) || isOutOfTime
+        ? '- -'
+        : 'IN PROGRESS'}
     </div>
   )
 }

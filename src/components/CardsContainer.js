@@ -2,7 +2,9 @@ import React, { useContext, useEffect } from 'react'
 import Card from './Card'
 import { CardsContext } from './CardsContext'
 
-const CardsContainer = () => {
+const CardsContainer = ({ hasWonGame }) => {
+  const { _gameIsInProgress } = useContext(CardsContext)
+  const [gameIsInProgress] = _gameIsInProgress
   const { _cards } = useContext(CardsContext)
   const [cards, setCards] = _cards
   const { _flippedCards } = useContext(CardsContext)
@@ -17,8 +19,6 @@ const CardsContainer = () => {
       )
     }
   }
-
-  console.log(cards)
 
   const renderedCards = cards.map((card, i) => {
     return (
@@ -36,14 +36,25 @@ const CardsContainer = () => {
   const renderedData =
     renderedCards.length > 0 ? renderedCards : cardsPlaceholder
 
-  // const checkFlippedCards = (selectedCard) => {
-  //   if (flippedCards.length < 2) {
-  //     setFlippedCards(...flippedCards, selectedCard)
-  //     console.log(flippedCards)
-  //   }
-  // }
+  console.log(gameIsInProgress)
+
+  const checkIfAllCardsAreFlipped = () => {
+    if (gameIsInProgress) {
+      const checkAllCards = cards.filter((card) => {
+        return card.hasBeenFlipped === false
+      })
+
+      console.log(checkAllCards)
+
+      if (checkAllCards.length === 0) {
+        hasWonGame()
+      }
+    }
+  }
 
   useEffect(() => {
+    checkIfAllCardsAreFlipped()
+
     console.log(flippedCards)
     if (flippedCards.length === 2 && flippedCards[0] === flippedCards[1]) {
       console.log('They match')
