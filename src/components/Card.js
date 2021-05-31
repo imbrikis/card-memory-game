@@ -1,31 +1,24 @@
 import React, { useState, useContext } from 'react'
 import { CardsContext } from './CardsContext'
 
-const Card = ({ image, linkNum, hasBeenRevealed }) => {
-  const [clicked, setClicked] = useState(false)
-  const [selected, setSelected] = useState(false)
-
+const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
+  const { _cards } = useContext(CardsContext)
+  const [cards, setCards] = _cards
   const { _gameIsInProgress } = useContext(CardsContext)
   const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
   const { _flippedCards } = useContext(CardsContext)
   const [flippedCards, setFlippedCards] = _flippedCards
 
   const handleClick = () => {
-    if (gameIsInProgress && !selected) {
-      setClicked(!clicked)
-      // checkFlippedCards(linkNum)
-      setSelected(true)
+    console.log(gameIsInProgress, hasBeenFlipped)
+    if (gameIsInProgress && !hasBeenFlipped) {
+      console.log('running click')
+      const tempCards = cards
+      cards[index].hasBeenFlipped = true
+      setCards([...tempCards])
+      setFlippedCards([...flippedCards, linkNum])
     }
   }
-
-  // const checkFlippedCards = (selectedCard) => {
-  //   if (flippedCards.length < 2) {
-  //     setFlippedCards(...flippedCards, selectedCard)
-  //     console.log(flippedCards)
-  //   }
-  // }
-
-  console.log(gameIsInProgress)
 
   return (
     <div className={`flex items-center justify-center relative`}>
@@ -35,9 +28,11 @@ const Card = ({ image, linkNum, hasBeenRevealed }) => {
             ? 'bg-gray-300 border-gray-500'
             : 'bg-gray-100 border-gray-300 text-gray-300'
         } card-front ${gameIsInProgress && 'cursor-pointer'} ${
-          (clicked || hasBeenRevealed) && 'clicked-card-front'
+          (hasBeenFlipped || hasBeenRevealed) && 'clicked-card-front'
         }`}
-        onClick={handleClick}
+        onClick={
+          !hasBeenFlipped ? handleClick : console.log('cannot do the thing')
+        }
       >
         <div className='h-full flex items-center justify-center text-3xl'>
           ?
@@ -46,8 +41,10 @@ const Card = ({ image, linkNum, hasBeenRevealed }) => {
       <div
         className={`absolute w-32 h-44 inline-block bg-gray-500 border-4 border-gray-500 card-back ${
           gameIsInProgress && 'cursor-pointer'
-        } ${(clicked || hasBeenRevealed) && 'clicked-card-back'}`}
-        onClick={handleClick}
+        } ${(hasBeenFlipped || hasBeenRevealed) && 'clicked-card-back'}`}
+        onClick={
+          !hasBeenFlipped ? handleClick : console.log('cannot do the thing')
+        }
       >
         <div
           className='w-full h-full bg-center bg-cover bg-no-repeat'
