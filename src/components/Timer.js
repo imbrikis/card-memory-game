@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 const Timer = ({ initiateTimer, outOfTime }) => {
   // set the timer - change value for seconds
-  const [timer, setTimer] = useState(45)
+  const [timer, setTimer] = useState(30)
 
   useEffect(() => {
     let countdown

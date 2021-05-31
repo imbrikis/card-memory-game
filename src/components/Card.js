@@ -35,7 +35,7 @@ const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
         }
       >
         <div className='h-full flex items-center justify-center text-3xl'>
-          {linkNum}
+          ?
         </div>
       </div>
       <div

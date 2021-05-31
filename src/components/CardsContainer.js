@@ -36,15 +36,11 @@ const CardsContainer = ({ hasWonGame }) => {
   const renderedData =
     renderedCards.length > 0 ? renderedCards : cardsPlaceholder
 
-  console.log(gameIsInProgress)
-
   const checkIfAllCardsAreFlipped = () => {
     if (gameIsInProgress) {
       const checkAllCards = cards.filter((card) => {
         return card.hasBeenFlipped === false
       })
-
-      console.log(checkAllCards)
 
       if (checkAllCards.length === 0) {
         hasWonGame()
@@ -55,7 +51,6 @@ const CardsContainer = ({ hasWonGame }) => {
   useEffect(() => {
     checkIfAllCardsAreFlipped()
 
-    console.log(flippedCards)
     if (flippedCards.length === 2 && flippedCards[0] === flippedCards[1]) {
       console.log('They match')
       setFlippedCards([])
