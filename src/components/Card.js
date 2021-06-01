@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { CardsContext } from './CardsContext'
 
 const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
@@ -31,7 +31,7 @@ const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
         onClick={!hasBeenFlipped && gameIsInProgress ? handleClick : null}
       >
         <div className='h-full flex items-center justify-center text-3xl'>
-          {linkNum}
+          ?
         </div>
       </div>
       <div

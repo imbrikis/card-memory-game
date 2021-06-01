@@ -29,9 +29,10 @@ const Timer = ({ initiateTimer, outOfTime, gameHasEnded }) => {
   }, [initiateTimer, timer, gameHasEnded])
 
   return (
-    <div className='inline-block'>
+    <div className='flex items-center'>
+      <div className='inline-block text-4xl mr-2'>Time:</div>
       <h1
-        className={`text-4xl bg-gray-200 px-4 ${
+        className={`inline-block text-4xl bg-gray-200 px-2 ${
           initiateTimer ? 'text-black' : 'text-gray-400'
         }`}
       >

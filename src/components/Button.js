@@ -21,7 +21,6 @@ const Button = ({ startGame, gameHasEnded, isOutOfTime, resetGame }) => {
 
   const handleClickNewGame = () => {
     if (gameHasEnded) {
-      console.log('resetting the game')
       setGameIsInProgress(false)
       resetGame()
       let shuffledCards = shuffleCards()
@@ -29,8 +28,6 @@ const Button = ({ startGame, gameHasEnded, isOutOfTime, resetGame }) => {
       setFlippedCards([])
     }
   }
-
-  console.log(gameIsInProgress, isOutOfTime, gameHasEnded)
 
   return (
     <div

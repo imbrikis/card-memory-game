@@ -20,8 +20,6 @@ const CardsContainer = ({ endTheGame }) => {
     }
   }
 
-  console.log(flippedCards)
-
   const renderedCards = cards.map((card, i) => {
     return (
       <Card
@@ -54,14 +52,11 @@ const CardsContainer = ({ endTheGame }) => {
     checkIfAllCardsAreFlipped()
 
     if (flippedCards.length === 2 && flippedCards[0] === flippedCards[1]) {
-      console.log('They match')
       setFlippedCards([])
     } else if (
       flippedCards.length === 2 &&
       flippedCards[0] !== flippedCards[1]
     ) {
-      console.log('They DO NOT match')
-
       const tempCards = cards
       flippedCards.forEach((flippedCard) => {
         tempCards.forEach((card) => {
