@@ -25,7 +25,6 @@ const CardsContainer = ({ endTheGame }) => {
       <Card
         image={card.image}
         linkNum={card.linkNum}
-        hasBeenRevealed={card.hasBeenRevealed}
         hasBeenFlipped={card.hasBeenFlipped}
         key={card.key}
         index={i}

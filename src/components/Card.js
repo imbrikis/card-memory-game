@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { CardsContext } from './CardsContext'
 
-const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
+const Card = ({ image, linkNum, hasBeenFlipped, index }) => {
   const { _cards } = useContext(CardsContext)
   const [cards, setCards] = _cards
   const { _gameIsInProgress } = useContext(CardsContext)
@@ -26,7 +26,7 @@ const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
             ? 'bg-gray-300 border-gray-500'
             : 'bg-gray-100 border-gray-300 text-gray-300'
         } card-front ${gameIsInProgress && 'cursor-pointer'} ${
-          (hasBeenFlipped || hasBeenRevealed) && 'clicked-card-front'
+          hasBeenFlipped && 'clicked-card-front'
         }`}
         onClick={!hasBeenFlipped && gameIsInProgress ? handleClick : null}
       >
@@ -37,7 +37,7 @@ const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
       <div
         className={`absolute w-32 h-44 inline-block bg-gray-500 border-4 border-gray-500 card-back ${
           gameIsInProgress && 'cursor-pointer'
-        } ${(hasBeenFlipped || hasBeenRevealed) && 'clicked-card-back'}`}
+        } ${hasBeenFlipped && 'clicked-card-back'}`}
         onClick={!hasBeenFlipped && gameIsInProgress ? handleClick : null}
       >
         <div
