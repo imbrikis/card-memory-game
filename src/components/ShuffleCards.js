@@ -1,3 +1,18 @@
+// Attempt at getting random images to populate the Cards array from Unsplash
+// let cards = []
+
+// const getImages = async () => {
+//   for (let x = 0; x < 9; x++) {
+//     const res = await fetch('https://source.unsplash.com/random')
+//     const data = res
+//     cards.push({ image: data.url, linkNum: x + 1 })
+//     console.log(data)
+//   }
+// }
+// getImages()
+
+// console.log(cards)
+
 let cards = [
   {
     image:

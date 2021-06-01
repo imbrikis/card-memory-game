@@ -11,7 +11,6 @@ module.exports = {
       green: '#98E797',
       gray: colors.trueGray,
       red: colors.red,
-      black: colors.black,
     },
     extend: {},
   },
