@@ -8,7 +8,7 @@
 - User can click a button to start the game. When this button is clicked, a timer will start
 - User can click on any card to unveil the image that is underneath it (change it to visible state). The image will be displayed until the user clicks on a 2nd card
 - When the User clicks on the 2nd card:
-- If there is a match, the 2 cards will be eliminated from the game (either hide/remove them or leave them in the visible state)
+- If there is a match, the 2 cards will be eliminated from the game (leave them in the visible state)
 - If there isn’t a match, the 2 cards will flip back to their original state (hidden state)
 - When all the matches have been found, the User can see a dialog box showing a Congratulations message with a counter displaying the time it took to finish the game
 
@@ -16,3 +16,8 @@
 
 - Use can choose between multiple levels of difficulty (Easy, Medium, Hard). Increased difficulty means: decreasing the time available to complete and/or increasing the number of cards
 - User can see the game statistics (nr. of times he won / he lost, best time for each level)
+
+### Current Issues
+
+- Users can click on another card during the half second it takes for the incorrect cards to flip over
+- This causes a 3rd card to stay in a flipped over state

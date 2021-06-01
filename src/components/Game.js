@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import Timer from './Timer'
 import Button from './Button'
 import CardsContainer from './CardsContainer'
@@ -8,7 +8,13 @@ import { CardsProvider } from './CardsContext'
 const Game = () => {
   const [initiateTimer, setInitiateTimer] = useState(false)
   const [isOutOfTime, setIsOutOfTime] = useState(false)
-  const [wonGame, setWonGame] = useState(false)
+  const [gameHasEnded, setGameHasEnded] = useState(false)
+
+  const resetGame = () => {
+    setGameHasEnded(false)
+    setIsOutOfTime(false)
+    setInitiateTimer(false)
+  }
 
   const startGame = () => {
     setInitiateTimer(true)
@@ -16,36 +22,45 @@ const Game = () => {
 
   const outOfTime = () => {
     setIsOutOfTime(true)
+    setInitiateTimer(false)
+    setGameHasEnded(true)
   }
 
-  const hasWonGame = () => {
+  const endTheGame = () => {
     if (!isOutOfTime) {
-      setWonGame(true)
+      setGameHasEnded(true)
       setInitiateTimer(false)
     }
   }
+
+  console.log(initiateTimer)
 
   return (
     <CardsProvider>
       <div
         className={`w-full h-screen ${isOutOfTime && 'bg-red-300'} ${
-          wonGame && 'bg-green bg-opacity-40'
+          gameHasEnded && 'bg-green bg-opacity-40'
         }`}
       >
         <div className='h-screen py-16 w:7/8 md:w-2/3 mx-auto flex flex-col'>
           <div className=''>
             <div className='flex items-center justify-between'>
               <h1 className='text-6xl inline-block'>Remaining Time</h1>
-              <Timer initiateTimer={initiateTimer} outOfTime={outOfTime} />
+              <Timer
+                initiateTimer={initiateTimer}
+                outOfTime={outOfTime}
+                gameHasEnded={gameHasEnded}
+              />
               <Button
                 startGame={startGame}
-                wonGame={wonGame}
+                gameHasEnded={gameHasEnded}
                 isOutOfTime={isOutOfTime}
+                resetGame={resetGame}
               />
             </div>
           </div>
-          <CardsContainer hasWonGame={hasWonGame} />
-          <Info wonGame={wonGame} isOutOfTime={isOutOfTime} />
+          <CardsContainer endTheGame={endTheGame} />
+          <Info gameHasEnded={gameHasEnded} isOutOfTime={isOutOfTime} />
         </div>
       </div>
     </CardsProvider>

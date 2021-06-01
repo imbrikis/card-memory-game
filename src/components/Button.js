@@ -2,11 +2,13 @@ import React, { useContext } from 'react'
 import { shuffleCards } from './ShuffleCards'
 import { CardsContext } from './CardsContext'
 
-const Button = ({ startGame, wonGame, isOutOfTime }) => {
+const Button = ({ startGame, gameHasEnded, isOutOfTime, resetGame }) => {
   const { _cards } = useContext(CardsContext)
   const [cards, setCards] = _cards
   const { _gameIsInProgress } = useContext(CardsContext)
   const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
+  const { _flippedCards } = useContext(CardsContext)
+  const [flippedCards, setFlippedCards] = _flippedCards
 
   const handleClick = () => {
     if (!gameIsInProgress) {
@@ -17,19 +19,38 @@ const Button = ({ startGame, wonGame, isOutOfTime }) => {
     }
   }
 
+  const handleClickNewGame = () => {
+    if (gameHasEnded) {
+      console.log('resetting the game')
+      setGameIsInProgress(false)
+      resetGame()
+      let shuffledCards = shuffleCards()
+      setCards(shuffledCards)
+      setFlippedCards([])
+    }
+  }
+
+  console.log(gameIsInProgress, isOutOfTime, gameHasEnded)
+
   return (
     <div
       className={`inline-block w-72 h-16 rounded-xl text-4xl flex justify-center items-center ${
-        !gameIsInProgress
+        (!gameIsInProgress && !gameHasEnded && !isOutOfTime) || gameHasEnded
           ? 'bg-green bg-opacity-40 cursor-pointer hover:bg-opacity-100'
           : 'bg-gray-100'
       }`}
-      onClick={handleClick}
+      onClick={
+        !gameIsInProgress && !isOutOfTime && !gameHasEnded
+          ? handleClick
+          : gameHasEnded || (!gameIsInProgress && isOutOfTime && !gameHasEnded)
+          ? handleClickNewGame
+          : null
+      }
     >
-      {!gameIsInProgress
+      {!gameIsInProgress && !gameHasEnded && !isOutOfTime
         ? 'START'
-        : (gameIsInProgress && wonGame) || isOutOfTime
-        ? '- -'
+        : (gameIsInProgress && gameHasEnded) || isOutOfTime
+        ? 'RESTART GAME'
         : 'IN PROGRESS'}
     </div>
   )

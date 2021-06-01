@@ -10,9 +10,7 @@ const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
   const [flippedCards, setFlippedCards] = _flippedCards
 
   const handleClick = () => {
-    console.log(gameIsInProgress, hasBeenFlipped)
     if (gameIsInProgress && !hasBeenFlipped) {
-      console.log('running click')
       const tempCards = cards
       cards[index].hasBeenFlipped = true
       setCards([...tempCards])
@@ -30,21 +28,17 @@ const Card = ({ image, linkNum, hasBeenRevealed, hasBeenFlipped, index }) => {
         } card-front ${gameIsInProgress && 'cursor-pointer'} ${
           (hasBeenFlipped || hasBeenRevealed) && 'clicked-card-front'
         }`}
-        onClick={
-          !hasBeenFlipped ? handleClick : console.log('cannot do the thing')
-        }
+        onClick={!hasBeenFlipped && gameIsInProgress ? handleClick : null}
       >
         <div className='h-full flex items-center justify-center text-3xl'>
-          ?
+          {linkNum}
         </div>
       </div>
       <div
         className={`absolute w-32 h-44 inline-block bg-gray-500 border-4 border-gray-500 card-back ${
           gameIsInProgress && 'cursor-pointer'
         } ${(hasBeenFlipped || hasBeenRevealed) && 'clicked-card-back'}`}
-        onClick={
-          !hasBeenFlipped ? handleClick : console.log('cannot do the thing')
-        }
+        onClick={!hasBeenFlipped && gameIsInProgress ? handleClick : null}
       >
         <div
           className='w-full h-full bg-center bg-cover bg-no-repeat'

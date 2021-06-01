@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { CardsContext } from './CardsContext'
 
-const Timer = ({ initiateTimer, outOfTime }) => {
+const Timer = ({ initiateTimer, outOfTime, gameHasEnded }) => {
+  const { _gameIsInProgress } = useContext(CardsContext)
+  const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
   // set the timer - change value for seconds
-  const [timer, setTimer] = useState(30)
+  const [timer, setTimer] = useState(45)
 
   useEffect(() => {
     let countdown
@@ -11,14 +14,19 @@ const Timer = ({ initiateTimer, outOfTime }) => {
       countdown = setInterval(() => setTimer(timer - 1), 1000)
     } else if (initiateTimer && timer === 0) {
       outOfTime()
+      setGameIsInProgress(false)
     }
 
-    if (initiateTimer) {
+    if (initiateTimer && timer > 0) {
       return () => {
         clearInterval(countdown)
       }
+    } else if (gameHasEnded || (!initiateTimer && timer === 0)) {
+      return () => {
+        setTimer(45)
+      }
     }
-  }, [initiateTimer, timer])
+  }, [initiateTimer, timer, gameHasEnded])
 
   return (
     <div className='inline-block'>

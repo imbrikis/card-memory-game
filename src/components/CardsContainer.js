@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Card from './Card'
 import { CardsContext } from './CardsContext'
 
-const CardsContainer = ({ hasWonGame }) => {
+const CardsContainer = ({ endTheGame }) => {
   const { _gameIsInProgress } = useContext(CardsContext)
   const [gameIsInProgress] = _gameIsInProgress
   const { _cards } = useContext(CardsContext)
@@ -19,6 +19,8 @@ const CardsContainer = ({ hasWonGame }) => {
       )
     }
   }
+
+  console.log(flippedCards)
 
   const renderedCards = cards.map((card, i) => {
     return (
@@ -43,7 +45,7 @@ const CardsContainer = ({ hasWonGame }) => {
       })
 
       if (checkAllCards.length === 0) {
-        hasWonGame()
+        endTheGame()
       }
     }
   }
@@ -76,7 +78,7 @@ const CardsContainer = ({ hasWonGame }) => {
 
       setTimeout(resetData, 500)
     }
-  }, [flippedCards])
+  }, [flippedCards, endTheGame])
 
   return (
     <div className='w-full flex-grow'>
