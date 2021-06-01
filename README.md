@@ -1,23 +1,18 @@
-# A card memory game
+# Card Memory
 
-## Card memory is a game where you have to click on a card to see what image is underneath it and try to find the matching image underneath the other cards.
+## _Made with React and Tailwind_
 
-### User Stories
+Card Memory is a game where you have to click on a card to see what image is underneath it and try to find the matching image underneath the other cards.
 
-- User can see a grid with n x n cards (n is an integer). All the cards are faced down initially (hidden state)
+- The user can see a grid with 18 cards. All the cards are faced down initially (hasBeenFlipped state set to false)
 - User can click a button to start the game. When this button is clicked, a timer will start
-- User can click on any card to unveil the image that is underneath it (change it to visible state). The image will be displayed until the user clicks on a 2nd card
+- User can click on any card to unveil the image that is underneath it (change hasBeenFlipped state to true). The image will be displayed until the user clicks on a 2nd card
 - When the User clicks on the 2nd card:
-- If there is a match, the 2 cards will be eliminated from the game (leave them in the visible state)
-- If there isn’t a match, the 2 cards will flip back to their original state (hidden state)
-- When all the matches have been found, the User can see a dialog box showing a Congratulations message with a counter displaying the time it took to finish the game
-
-### Bonus features
-
-- Use can choose between multiple levels of difficulty (Easy, Medium, Hard). Increased difficulty means: decreasing the time available to complete and/or increasing the number of cards
-- User can see the game statistics (nr. of times he won / he lost, best time for each level)
+- If there is a match, the 2 cards will be eliminated from the game (leave them in the flipped state)
+- If there isn’t a match, the 2 cards will flip back to their original state (hasBeenFlipped set to false)
+- When all the matches have been found, the User is congratulated and has the option to restart the game with a newly shuffled deck
 
 ### Current Issues
 
-- Users can click on another card during the half second it takes for the incorrect cards to flip over
-- This causes a 3rd card to stay in a flipped over state
+- Users can click on another card during the half second it takes for the other cards to flip over: This causes a 3rd card to stay in a flipped over state
+- This application only works on desktop at the moment
