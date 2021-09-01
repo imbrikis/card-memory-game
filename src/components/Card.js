@@ -5,7 +5,7 @@ const Card = ({ image, linkNum, hasBeenFlipped, index }) => {
   const { _cards } = useContext(CardsContext)
   const [cards, setCards] = _cards
   const { _gameIsInProgress } = useContext(CardsContext)
-  const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
+  const [gameIsInProgress] = _gameIsInProgress
   const { _flippedCards } = useContext(CardsContext)
   const [flippedCards, setFlippedCards] = _flippedCards
 

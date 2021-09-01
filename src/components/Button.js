@@ -4,11 +4,11 @@ import { CardsContext } from './CardsContext'
 
 const Button = ({ startGame, gameHasEnded, isOutOfTime, resetGame }) => {
   const { _cards } = useContext(CardsContext)
-  const [cards, setCards] = _cards
+  const [, setCards] = _cards
   const { _gameIsInProgress } = useContext(CardsContext)
   const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
   const { _flippedCards } = useContext(CardsContext)
-  const [flippedCards, setFlippedCards] = _flippedCards
+  const [, setFlippedCards] = _flippedCards
 
   const handleClick = () => {
     if (!gameIsInProgress) {

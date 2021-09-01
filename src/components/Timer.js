@@ -3,7 +3,7 @@ import { CardsContext } from './CardsContext'
 
 const Timer = ({ initiateTimer, outOfTime, gameHasEnded }) => {
   const { _gameIsInProgress } = useContext(CardsContext)
-  const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
+  const [, setGameIsInProgress] = _gameIsInProgress
   // set the timer - change value for seconds
   const [timer, setTimer] = useState(45)
 

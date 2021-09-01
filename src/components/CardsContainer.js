@@ -35,19 +35,18 @@ const CardsContainer = ({ endTheGame }) => {
   const renderedData =
     renderedCards.length > 0 ? renderedCards : cardsPlaceholder
 
-  const checkIfAllCardsAreFlipped = () => {
-    if (gameIsInProgress) {
-      const checkAllCards = cards.filter((card) => {
-        return card.hasBeenFlipped === false
-      })
+  useEffect(() => {
+    const checkIfAllCardsAreFlipped = () => {
+      if (gameIsInProgress) {
+        const checkAllCards = cards.filter((card) => {
+          return card.hasBeenFlipped === false
+        })
 
-      if (checkAllCards.length === 0) {
-        endTheGame()
+        if (checkAllCards.length === 0) {
+          endTheGame()
+        }
       }
     }
-  }
-
-  useEffect(() => {
     checkIfAllCardsAreFlipped()
 
     if (flippedCards.length === 2 && flippedCards[0] === flippedCards[1]) {
