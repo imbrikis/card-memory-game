@@ -11,8 +11,8 @@ const Info = ({ gameHasEnded, isOutOfTime }) => {
       : gameIsInProgress && !isOutOfTime && !gameHasEnded
       ? 'Start guessing!'
       : !gameIsInProgress && isOutOfTime && gameHasEnded
-      ? 'You have lost :('
-      : 'You have WON!!!'
+      ? 'You have lost 😦'
+      : 'You have WON!!! 🎉'
 
   return (
     <div className='h-20 w-full flex justify-center items-center'>
