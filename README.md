@@ -16,3 +16,9 @@ Card Memory is a game where you have to click on a card to see what image is und
 
 - Users can click on another card during the half second it takes for the other cards to flip over: This causes a 3rd card to stay in a flipped over state
 - This application only works on desktop at the moment
+
+### Future Features
+
+- High Score tracking
+- Random image generation
+- Display all cards after a loss and highlight the ones missed
