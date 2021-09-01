@@ -3,7 +3,7 @@ import { CardsContext } from './CardsContext'
 
 const Info = ({ gameHasEnded, isOutOfTime }) => {
   const { _gameIsInProgress } = useContext(CardsContext)
-  const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
+  const [gameIsInProgress] = _gameIsInProgress
 
   const info =
     !gameIsInProgress && !isOutOfTime && !gameHasEnded
