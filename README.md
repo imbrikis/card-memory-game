@@ -1,4 +1,6 @@
-# Card Memory
+# [Card Memory Game](https://imb-card-memory-game.netlify.app/)
+
+![image](https://user-images.githubusercontent.com/7816525/156109002-f1ef842d-4ed2-4363-afb2-4e932d277288.png)
 
 ## _Made with React and Tailwind_
 
