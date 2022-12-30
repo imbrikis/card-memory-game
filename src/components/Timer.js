@@ -27,7 +27,7 @@ const Timer = (props) => {
         setTimer(45)
       }
     }
-  }, [initiateTimer, timer, gameHasEnded])
+  }, [initiateTimer, timer, gameHasEnded, outOfTime, setGameIsInProgress])
 
   return (
     <div className='flex items-center'>

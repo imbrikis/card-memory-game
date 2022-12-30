@@ -6,7 +6,7 @@ import { GameContext } from '../context/GameContext'
 const CardsContainer = (props) => {
   const { endTheGame } = props
 
-  const { cards, flippedCards, numUniqueCards, setFlippedCards } =
+  const { cards, flippedCards, numUniqueCards, setCards, setFlippedCards } =
     useContext(CardsContext)
   const { gameIsInProgress } = useContext(GameContext)
 
@@ -51,29 +51,34 @@ const CardsContainer = (props) => {
     }
     checkIfAllCardsAreFlipped()
 
-    if (flippedCards.length === 2 && flippedCards[0] === flippedCards[1]) {
-      setFlippedCards([])
-    } else if (
-      flippedCards.length === 2 &&
-      flippedCards[0] !== flippedCards[1]
-    ) {
-      const cardsCopy = cards.map((card) => {
-        return Object.assign({}, card)
-      })
-      flippedCards.forEach((flippedCard) => {
-        cardsCopy.forEach((card) => {
-          if (flippedCard === card.linkNum) {
-            card.hasBeenFlipped = false
-          }
-        })
-      })
-
-      const resetData = () => {
-        // setCards(cardsCopy)
+    // Check if 2 cards have been flipped
+    if (flippedCards.length === 2) {
+      // Check if flipped cards match
+      if (flippedCards[0] === flippedCards[1]) {
+        // remove the cards from the temporary array
+        // and leave them flipped in the permanent cards array
         setFlippedCards([])
-      }
+      } else if (flippedCards[0] !== flippedCards[1]) {
+        // otherwise, make a copy of the cards array with the reverted changes
+        // and push that to the cards array
+        const cardsCopy = cards.map((card) => {
+          return Object.assign({}, card)
+        })
+        flippedCards.forEach((flippedCard) => {
+          cardsCopy.forEach((card) => {
+            if (flippedCard === card.linkNum) {
+              card.hasBeenFlipped = false
+            }
+          })
+        })
 
-      setTimeout(resetData, 500)
+        const resetData = () => {
+          setCards(cardsCopy)
+          setFlippedCards([])
+        }
+
+        setTimeout(resetData, 500)
+      }
     }
   }, [flippedCards, endTheGame])
 

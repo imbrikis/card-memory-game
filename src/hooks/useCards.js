@@ -2,42 +2,43 @@ import { useState, useEffect, useCallback } from 'react'
 import { shuffleCards } from '../helpers/ShuffleCards'
 
 export const useCards = (imageAmount) => {
-  const [cards, _setCards] = useState([])
+  const [cards, setCards] = useState([])
+  const [fetchIsInFlight, setFetchIsInFlight] = useState(true)
 
-  const setCards = useCallback(
+  const setCardsWithIndex = useCallback(
     (index) => {
       const cardsCopy = cards.map((card) => {
         return Object.assign({}, card)
       })
       cardsCopy[index].hasBeenFlipped = true
 
-      _setCards(cardsCopy)
+      setCards(cardsCopy)
     },
     [cards]
   )
 
-  const fetchCards = useCallback(async () => {
+  const _fetchCards = useCallback(async () => {
     let fetchedCards = []
 
     for (let x = 0; x < imageAmount; x++) {
       const { url } = await fetch('https://source.unsplash.com/random/&' + x)
-      fetchedCards.push({ url })
+      fetchedCards.push({ image: url, linkNum: x + 1 })
     }
 
     const shuffledCards = shuffleCards(fetchedCards)
 
-    console.log(
-      `%c shuffledCards:`,
-      'background:yellow;color:black',
-      shuffledCards
-    )
-
-    _setCards(shuffledCards)
+    setFetchIsInFlight(false)
+    setCards(shuffledCards)
   }, [imageAmount])
+
+  const fetchCards = useCallback(() => {
+    setFetchIsInFlight(true)
+    _fetchCards()
+  }, [_fetchCards])
 
   useEffect(() => {
     fetchCards()
   }, [fetchCards])
 
-  return { cards, fetchCards, setCards }
+  return { cards, fetchCards, fetchIsInFlight, setCards, setCardsWithIndex }
 }

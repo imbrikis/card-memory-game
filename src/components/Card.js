@@ -5,12 +5,13 @@ import { GameContext } from '../context/GameContext'
 const Card = (props) => {
   const { image, linkNum, hasBeenFlipped, index } = props
 
-  const { setCards, flippedCards, setFlippedCards } = useContext(CardsContext)
+  const { setCardsWithIndex, flippedCards, setFlippedCards } =
+    useContext(CardsContext)
   const { gameIsInProgress } = useContext(GameContext)
 
   const handleClick = () => {
     if (gameIsInProgress && !hasBeenFlipped) {
-      setCards(index)
+      setCardsWithIndex(index)
       setFlippedCards([...flippedCards, linkNum])
     }
   }
@@ -25,7 +26,11 @@ const Card = (props) => {
         } card-front ${gameIsInProgress && 'cursor-pointer'} ${
           hasBeenFlipped && 'clicked-card-front'
         }`}
-        onClick={!hasBeenFlipped && gameIsInProgress ? handleClick : null}
+        onClick={
+          !hasBeenFlipped && gameIsInProgress && flippedCards.length < 2
+            ? handleClick
+            : null
+        }
       >
         <div className='h-full flex items-center justify-center text-3xl'>
           ?

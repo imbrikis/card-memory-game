@@ -18,15 +18,21 @@ Card Memory is a game where you have to click on a card to see what image is und
 <br />
 
 ![image](https://user-images.githubusercontent.com/7816525/156109002-f1ef842d-4ed2-4363-afb2-4e932d277288.png)
+
 ### [Check out the demo!](https://imb-card-memory-game.netlify.app/)
 
 ### Current Issues
 
-- Users can click on another card during the half second it takes for the other cards to flip over: This causes a 3rd card to stay in a flipped over state
-- This application only works on desktop at the moment
+- None at the moment
+
+### Responsive?
+
+- This application only works on desktop
 
 ### Future Features
 
-- High Score tracking
-- Random image generation
+- Responsive on devices as small as 400px x 600px
+- High Score tracking (time and clicks)
 - Display all cards after a loss and highlight the ones missed
+- Leaderboard?
+  - If so, then Sign in?

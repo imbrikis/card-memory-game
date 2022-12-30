@@ -1,18 +1,17 @@
 import React, { useContext } from 'react'
 import { CardsContext } from '../context/CardsContext'
+import { GameContext } from '../context/GameContext'
 
 const Button = (props) => {
   const { startGame, gameHasEnded, isOutOfTime, resetGame } = props
 
-  const {
-    fetchCards,
-    gameIsInProgress,
-    numUniqueCards,
-    setGameIsInProgress,
-    setFlippedCards,
-  } = useContext(CardsContext)
+  const { fetchCards, fetchIsInFlight, numUniqueCards, setFlippedCards } =
+    useContext(CardsContext)
+  const { gameIsInProgress, setGameIsInProgress } = useContext(GameContext)
 
   const handleClick = () => {
+    if (fetchIsInFlight) return
+
     if (!gameIsInProgress && !isOutOfTime && !gameHasEnded) {
       return startGame()
     }
@@ -27,23 +26,30 @@ const Button = (props) => {
   }
 
   const buttonClasses =
-    (!gameIsInProgress && !gameHasEnded && !isOutOfTime) || gameHasEnded
+    (!gameIsInProgress && !gameHasEnded && !isOutOfTime && !fetchIsInFlight) ||
+    gameHasEnded
       ? 'bg-green bg-opacity-40 cursor-pointer hover:bg-opacity-100'
       : 'bg-gray-100'
 
-  const renderedGameText =
-    !gameIsInProgress && !gameHasEnded && !isOutOfTime
-      ? 'START'
-      : (gameIsInProgress && gameHasEnded) || isOutOfTime
-      ? 'RESTART GAME'
-      : 'IN PROGRESS'
+  const renderGameText = () => {
+    switch (true) {
+      case fetchIsInFlight:
+        return '..loading'
+      case !gameIsInProgress && !gameHasEnded && !isOutOfTime:
+        return 'START'
+      case (gameIsInProgress && gameHasEnded) || isOutOfTime:
+        return 'RESTART GAME'
+      default:
+        return 'IN PROGRESS'
+    }
+  }
 
   return (
     <div
       className={`inline-block w-72 h-16 rounded-xl text-4xl flex justify-center items-center ${buttonClasses}`}
       onClick={handleClick}
     >
-      {renderedGameText}
+      {renderGameText()}
     </div>
   )
 }

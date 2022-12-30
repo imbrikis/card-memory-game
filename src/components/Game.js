@@ -10,7 +10,7 @@ const Game = () => {
   const [isOutOfTime, setIsOutOfTime] = useState(false)
   const [gameHasEnded, setGameHasEnded] = useState(false)
 
-  const { gameIsInProgress, setGameIsInProgress } = useContext(GameContext)
+  const { setGameIsInProgress } = useContext(GameContext)
 
   const resetGame = () => {
     setGameHasEnded(false)

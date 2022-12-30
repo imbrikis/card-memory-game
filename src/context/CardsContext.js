@@ -5,7 +5,8 @@ export const CardsContext = createContext()
 
 export const CardsProvider = ({ children }) => {
   const numUniqueCards = 9
-  const { cards, fetchCards, setCards } = useCards(numUniqueCards)
+  const { cards, fetchCards, fetchIsInFlight, setCards, setCardsWithIndex } =
+    useCards(numUniqueCards)
   const [flippedCards, setFlippedCards] = useState([])
 
   return (
@@ -13,9 +14,11 @@ export const CardsProvider = ({ children }) => {
       value={{
         cards,
         fetchCards,
+        fetchIsInFlight,
         flippedCards,
         numUniqueCards,
         setCards,
+        setCardsWithIndex,
         setFlippedCards,
       }}
     >
