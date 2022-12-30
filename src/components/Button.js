@@ -1,54 +1,49 @@
 import React, { useContext } from 'react'
-import { shuffleCards } from './ShuffleCards'
-import { CardsContext } from './CardsContext'
+import { CardsContext } from '../context/CardsContext'
 
-const Button = ({ startGame, gameHasEnded, isOutOfTime, resetGame }) => {
-  const { _cards } = useContext(CardsContext)
-  const [, setCards] = _cards
-  const { _gameIsInProgress } = useContext(CardsContext)
-  const [gameIsInProgress, setGameIsInProgress] = _gameIsInProgress
-  const { _flippedCards } = useContext(CardsContext)
-  const [, setFlippedCards] = _flippedCards
+const Button = (props) => {
+  const { startGame, gameHasEnded, isOutOfTime, resetGame } = props
+
+  const {
+    fetchCards,
+    gameIsInProgress,
+    numUniqueCards,
+    setGameIsInProgress,
+    setFlippedCards,
+  } = useContext(CardsContext)
 
   const handleClick = () => {
-    if (!gameIsInProgress) {
-      setGameIsInProgress(true)
-      let shuffledCards = shuffleCards()
-      setCards(shuffledCards)
-      startGame()
+    if (!gameIsInProgress && !isOutOfTime && !gameHasEnded) {
+      return startGame()
+    }
+
+    if (gameHasEnded || (!gameIsInProgress && isOutOfTime && !gameHasEnded)) {
+      setGameIsInProgress(false)
+      resetGame()
+      fetchCards(numUniqueCards)
+      setFlippedCards([])
+      return
     }
   }
 
-  const handleClickNewGame = () => {
-    if (gameHasEnded) {
-      setGameIsInProgress(false)
-      resetGame()
-      let shuffledCards = shuffleCards()
-      setCards(shuffledCards)
-      setFlippedCards([])
-    }
-  }
+  const buttonClasses =
+    (!gameIsInProgress && !gameHasEnded && !isOutOfTime) || gameHasEnded
+      ? 'bg-green bg-opacity-40 cursor-pointer hover:bg-opacity-100'
+      : 'bg-gray-100'
+
+  const renderedGameText =
+    !gameIsInProgress && !gameHasEnded && !isOutOfTime
+      ? 'START'
+      : (gameIsInProgress && gameHasEnded) || isOutOfTime
+      ? 'RESTART GAME'
+      : 'IN PROGRESS'
 
   return (
     <div
-      className={`inline-block w-72 h-16 rounded-xl text-4xl flex justify-center items-center ${
-        (!gameIsInProgress && !gameHasEnded && !isOutOfTime) || gameHasEnded
-          ? 'bg-green bg-opacity-40 cursor-pointer hover:bg-opacity-100'
-          : 'bg-gray-100'
-      }`}
-      onClick={
-        !gameIsInProgress && !isOutOfTime && !gameHasEnded
-          ? handleClick
-          : gameHasEnded || (!gameIsInProgress && isOutOfTime && !gameHasEnded)
-          ? handleClickNewGame
-          : null
-      }
+      className={`inline-block w-72 h-16 rounded-xl text-4xl flex justify-center items-center ${buttonClasses}`}
+      onClick={handleClick}
     >
-      {!gameIsInProgress && !gameHasEnded && !isOutOfTime
-        ? 'START'
-        : (gameIsInProgress && gameHasEnded) || isOutOfTime
-        ? 'RESTART GAME'
-        : 'IN PROGRESS'}
+      {renderedGameText}
     </div>
   )
 }

@@ -1,19 +1,16 @@
 import React, { useContext } from 'react'
-import { CardsContext } from './CardsContext'
+import { CardsContext } from '../context/CardsContext'
+import { GameContext } from '../context/GameContext'
 
-const Card = ({ image, linkNum, hasBeenFlipped, index }) => {
-  const { _cards } = useContext(CardsContext)
-  const [cards, setCards] = _cards
-  const { _gameIsInProgress } = useContext(CardsContext)
-  const [gameIsInProgress] = _gameIsInProgress
-  const { _flippedCards } = useContext(CardsContext)
-  const [flippedCards, setFlippedCards] = _flippedCards
+const Card = (props) => {
+  const { image, linkNum, hasBeenFlipped, index } = props
+
+  const { setCards, flippedCards, setFlippedCards } = useContext(CardsContext)
+  const { gameIsInProgress } = useContext(GameContext)
 
   const handleClick = () => {
     if (gameIsInProgress && !hasBeenFlipped) {
-      const tempCards = cards
-      cards[index].hasBeenFlipped = true
-      setCards([...tempCards])
+      setCards(index)
       setFlippedCards([...flippedCards, linkNum])
     }
   }

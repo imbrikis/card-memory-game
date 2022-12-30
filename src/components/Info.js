@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
-import { CardsContext } from './CardsContext'
+import { GameContext } from '../context/GameContext'
 
-const Info = ({ gameHasEnded, isOutOfTime }) => {
-  const { _gameIsInProgress } = useContext(CardsContext)
-  const [gameIsInProgress] = _gameIsInProgress
+const Info = (props) => {
+  const { gameHasEnded, isOutOfTime } = props
+
+  const { gameIsInProgress } = useContext(GameContext)
 
   const info =
     !gameIsInProgress && !isOutOfTime && !gameHasEnded

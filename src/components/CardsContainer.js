@@ -1,36 +1,38 @@
 import React, { useContext, useEffect } from 'react'
 import Card from './Card'
-import { CardsContext } from './CardsContext'
+import { CardsContext } from '../context/CardsContext'
+import { GameContext } from '../context/GameContext'
 
-const CardsContainer = ({ endTheGame }) => {
-  const { _gameIsInProgress } = useContext(CardsContext)
-  const [gameIsInProgress] = _gameIsInProgress
-  const { _cards } = useContext(CardsContext)
-  const [cards, setCards] = _cards
-  const { _flippedCards } = useContext(CardsContext)
-  const [flippedCards, setFlippedCards] = _flippedCards
+const CardsContainer = (props) => {
+  const { endTheGame } = props
+
+  const { cards, flippedCards, numUniqueCards, setFlippedCards } =
+    useContext(CardsContext)
+  const { gameIsInProgress } = useContext(GameContext)
 
   const cardsPlaceholder = []
 
   if (!cards || cards.length === 0) {
-    for (let x = 0; x < 18; x++) {
+    for (let x = 0; x < numUniqueCards * 2; x++) {
       cardsPlaceholder.push(
         <Card key={Math.floor(Math.random() * 1000000) + 1} />
       )
     }
   }
 
-  const renderedCards = cards.map((card, i) => {
-    return (
-      <Card
-        image={card.image}
-        linkNum={card.linkNum}
-        hasBeenFlipped={card.hasBeenFlipped}
-        key={card.key}
-        index={i}
-      />
-    )
-  })
+  const renderedCards = cards
+    ? cards.map((card, i) => {
+        return (
+          <Card
+            image={card.image}
+            linkNum={card.linkNum}
+            hasBeenFlipped={card.hasBeenFlipped}
+            key={card.key}
+            index={i}
+          />
+        )
+      })
+    : []
 
   const renderedData =
     renderedCards.length > 0 ? renderedCards : cardsPlaceholder
@@ -55,9 +57,11 @@ const CardsContainer = ({ endTheGame }) => {
       flippedCards.length === 2 &&
       flippedCards[0] !== flippedCards[1]
     ) {
-      const tempCards = cards
+      const cardsCopy = cards.map((card) => {
+        return Object.assign({}, card)
+      })
       flippedCards.forEach((flippedCard) => {
-        tempCards.forEach((card) => {
+        cardsCopy.forEach((card) => {
           if (flippedCard === card.linkNum) {
             card.hasBeenFlipped = false
           }
@@ -65,7 +69,7 @@ const CardsContainer = ({ endTheGame }) => {
       })
 
       const resetData = () => {
-        setCards(tempCards)
+        // setCards(cardsCopy)
         setFlippedCards([])
       }
 

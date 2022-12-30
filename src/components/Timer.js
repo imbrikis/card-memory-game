@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { CardsContext } from './CardsContext'
+import { GameContext } from '../context/GameContext'
 
-const Timer = ({ initiateTimer, outOfTime, gameHasEnded }) => {
-  const { _gameIsInProgress } = useContext(CardsContext)
-  const [, setGameIsInProgress] = _gameIsInProgress
+const Timer = (props) => {
+  const { initiateTimer, outOfTime, gameHasEnded } = props
+
+  const { setGameIsInProgress } = useContext(GameContext)
   // set the timer - change value for seconds
   const [timer, setTimer] = useState(45)
 

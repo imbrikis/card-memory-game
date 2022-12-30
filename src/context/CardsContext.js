@@ -1,18 +1,22 @@
 import React, { createContext, useState } from 'react'
+import { useCards } from '../hooks/useCards'
 
 export const CardsContext = createContext()
 
 export const CardsProvider = ({ children }) => {
-  const [cards, setCards] = useState([])
-  const [gameIsInProgress, setGameIsInProgress] = useState(false)
+  const numUniqueCards = 9
+  const { cards, fetchCards, setCards } = useCards(numUniqueCards)
   const [flippedCards, setFlippedCards] = useState([])
 
   return (
     <CardsContext.Provider
       value={{
-        _cards: [cards, setCards],
-        _gameIsInProgress: [gameIsInProgress, setGameIsInProgress],
-        _flippedCards: [flippedCards, setFlippedCards],
+        cards,
+        fetchCards,
+        flippedCards,
+        numUniqueCards,
+        setCards,
+        setFlippedCards,
       }}
     >
       {children}
