@@ -1,6 +1,16 @@
 import { useState, useEffect, useCallback } from 'react'
 import { shuffleCards } from '../helpers/ShuffleCards'
 
+const searchStrings = [
+  'colorful',
+  'abstract',
+  'insect',
+  'fluid',
+  'trippy',
+  'wildlife',
+  'cats',
+]
+
 export const useCards = (imageAmount) => {
   const [cards, setCards] = useState([])
   const [fetchIsInFlight, setFetchIsInFlight] = useState(true)
@@ -18,10 +28,14 @@ export const useCards = (imageAmount) => {
   )
 
   const _fetchCards = useCallback(async () => {
+    const randomString =
+      searchStrings[Math.floor(Math.random() * searchStrings.length)]
     let fetchedCards = []
 
     for (let x = 0; x < imageAmount; x++) {
-      const { url } = await fetch('https://source.unsplash.com/random/&' + x)
+      const { url } = await fetch(
+        `https://source.unsplash.com/random/?${randomString}&${x}`
+      )
       fetchedCards.push({ image: url, linkNum: x + 1 })
     }
 
