@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { GameContext } from '../context/GameContext'
 
 const Timer = (props) => {
-  const { initiateTimer, outOfTime, gameHasEnded } = props
+  const { initiateTimer, timesUp, gameHasEnded } = props
 
   const { setGameIsInProgress } = useContext(GameContext)
   // set the timer - change value for seconds
@@ -14,7 +14,7 @@ const Timer = (props) => {
     if (initiateTimer && timer !== 0) {
       countdown = setInterval(() => setTimer(timer - 1), 1000)
     } else if (initiateTimer && timer === 0) {
-      outOfTime()
+      timesUp()
       setGameIsInProgress(false)
     }
 
@@ -27,13 +27,15 @@ const Timer = (props) => {
         setTimer(45)
       }
     }
-  }, [initiateTimer, timer, gameHasEnded, outOfTime, setGameIsInProgress])
+  }, [initiateTimer, timer, gameHasEnded, timesUp, setGameIsInProgress])
 
   return (
-    <div className='flex items-center'>
-      <div className='inline-block text-4xl mr-2'>Time:</div>
+    <div className='flex items-center pr-2 xl:pr-0'>
+      <div className='inline-block text-base xl:text-4xl md:text-2xl sm:text-xl mr-2'>
+        Time:
+      </div>
       <h1
-        className={`inline-block text-4xl bg-gray-200 px-2 ${
+        className={`inline-block w-10 text-xs text-center xl:text-4xl md:text-xl sm:text-lg bg-gray-200 px-1 xl:px-2 ${
           initiateTimer ? 'text-black' : 'text-gray-400'
         }`}
       >

@@ -3,7 +3,8 @@ import { useCards } from '../hooks/useCards'
 
 export const CardsContext = createContext()
 
-export const CardsProvider = ({ children }) => {
+export const CardsProvider = (props) => {
+  const { children } = props
   const numUniqueCards = 9
   const { cards, fetchCards, fetchIsInFlight, setCards, setCardsWithIndex } =
     useCards(numUniqueCards)

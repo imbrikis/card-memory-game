@@ -80,11 +80,18 @@ const CardsContainer = (props) => {
         setTimeout(resetData, 500)
       }
     }
-  }, [flippedCards, endTheGame])
+  }, [
+    flippedCards,
+    endTheGame,
+    gameIsInProgress,
+    cards,
+    setFlippedCards,
+    setCards,
+  ])
 
   return (
     <div className='w-full flex-grow'>
-      <div className='h-full mx-auto grid grid-cols-6 grid-rows-3'>
+      <div className='h-full mx-auto grid grid-cols-3 grid-rows-6 sm:grid-cols-6 sm:grid-rows-3'>
         {renderedData}
       </div>
     </div>
