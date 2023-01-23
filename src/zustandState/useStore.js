@@ -1,20 +1,51 @@
 import create from 'zustand'
-import { useCards } from '../hooks/useCards'
+import { shuffleCards } from '../helpers/ShuffleCards'
 
-const numUniqueCards = 9
+const searchStrings = [
+  'colorful',
+  'abstract',
+  'insect',
+  'fluid',
+  'trippy',
+  'wildlife',
+  'cats',
+]
 
-export const useStore = create((set) => {
-  const { cards, fetchCards, fetchIsInFlight, setCards, setCardsWithIndex } =
-    useCards(numUniqueCards)
+export const useStore = create((set, get) => {
+  const fetchCards = async (imageCount) => {
+    const randomString =
+      searchStrings[Math.floor(Math.random() * searchStrings.length)]
+    let fetchedCards = []
+
+    for (let x = 0; x < imageCount; x++) {
+      const { url } = await fetch(
+        `https://source.unsplash.com/random/?${randomString}&${x}`
+      )
+      fetchedCards.push({ image: url, linkNum: x + 1 })
+    }
+
+    const shuffledCards = shuffleCards(fetchedCards)
+
+    set(() => ({ cards: shuffledCards, fetchIsInFlight: false }))
+  }
+
+  const setCardsWithIndex = (index) => {
+    const cardsCopy = get().cards.map((card) => {
+      return Object.assign({}, card)
+    })
+    cardsCopy[index].hasBeenFlipped = true
+
+    set(() => ({ cards: cardsCopy }))
+  }
 
   return {
-    cards,
+    cards: [],
     fetchCards,
-    fetchIsInFlight,
-    setCards,
+    fetchIsInFlight: true,
+    numUniqueCards: 9,
+    setCards: (newCards) => set(() => ({ cards: newCards })),
     setCardsWithIndex,
     flippedCards: [],
-    setFlippedCards: (newCard) =>
-      set((state) => ({ flippedCards: [...state.flippedCards, newCard] })),
+    setFlippedCards: (newCards) => set(() => ({ flippedCards: newCards })),
   }
 })

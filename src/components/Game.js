@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { useStore } from '../zustandState/useStore'
 import { GameContext } from '../context/GameContext'
 import Timer from './Timer'
 import Button from './Button'
@@ -11,6 +12,7 @@ const Game = () => {
   const [gameHasEnded, setGameHasEnded] = useState(false)
 
   const { setGameIsInProgress } = useContext(GameContext)
+  const { fetchCards, numUniqueCards } = useStore((state) => state)
 
   const resetGame = () => {
     setGameHasEnded(false)
@@ -35,6 +37,10 @@ const Game = () => {
       setInitiateTimer(false)
     }
   }
+
+  useEffect(() => {
+    fetchCards(numUniqueCards)
+  }, [fetchCards, numUniqueCards])
 
   return (
     <div

@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
-import { CardsContext } from '../context/CardsContext'
 import { GameContext } from '../context/GameContext'
+import { useStore } from '../zustandState/useStore'
 
 const Card = (props) => {
   const { image, linkNum, hasBeenFlipped, index } = props
 
-  const { setCardsWithIndex, flippedCards, setFlippedCards } =
-    useContext(CardsContext)
+  const { flippedCards, setCardsWithIndex, setFlippedCards } = useStore(
+    (state) => state
+  )
   const { gameIsInProgress } = useContext(GameContext)
 
   const handleClick = () => {
