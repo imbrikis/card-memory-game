@@ -1,15 +1,7 @@
 import create from 'zustand'
 import { shuffleCards } from '../helpers/ShuffleCards'
 
-const searchStrings = [
-  'colorful',
-  'abstract',
-  'insect',
-  'fluid',
-  'trippy',
-  'wildlife',
-  'cats',
-]
+const searchStrings = ['colorful', 'abstract', 'fluid', 'trippy', 'cats']
 
 export const useStore = create((set, get) => {
   const fetchCards = async (imageCount) => {
@@ -42,9 +34,12 @@ export const useStore = create((set, get) => {
     cards: [],
     fetchCards,
     fetchIsInFlight: true,
+    gameIsInProgress: false,
     numUniqueCards: 9,
     setCards: (newCards) => set(() => ({ cards: newCards })),
     setCardsWithIndex,
+    setGameIsInProgress: () =>
+      set((isGameInProgress) => ({ gameIsInProgress: isGameInProgress })),
     flippedCards: [],
     setFlippedCards: (newCards) => set(() => ({ flippedCards: newCards })),
   }

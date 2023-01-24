@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Card from './Card'
-
-import { GameContext } from '../context/GameContext'
 import { useStore } from '../zustandState/useStore'
 
 const CardsContainer = (props) => {
   const { endTheGame } = props
 
-  const { cards, flippedCards, numUniqueCards, setCards, setFlippedCards } =
-    useStore((state) => state)
-  const { gameIsInProgress } = useContext(GameContext)
+  const {
+    cards,
+    flippedCards,
+    gameIsInProgress,
+    numUniqueCards,
+    setCards,
+    setFlippedCards,
+  } = useStore((state) => state)
 
   const cardsPlaceholder = []
 

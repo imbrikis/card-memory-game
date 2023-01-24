@@ -1,14 +1,11 @@
-import React, { useContext } from 'react'
-import { GameContext } from '../context/GameContext'
+import React from 'react'
 import { useStore } from '../zustandState/useStore'
 
 const Card = (props) => {
   const { image, linkNum, hasBeenFlipped, index } = props
 
-  const { flippedCards, setCardsWithIndex, setFlippedCards } = useStore(
-    (state) => state
-  )
-  const { gameIsInProgress } = useContext(GameContext)
+  const { flippedCards, gameIsInProgress, setCardsWithIndex, setFlippedCards } =
+    useStore((state) => state)
 
   const handleClick = () => {
     if (gameIsInProgress && !hasBeenFlipped) {

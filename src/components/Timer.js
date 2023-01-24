@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { GameContext } from '../context/GameContext'
+import React, { useEffect, useState } from 'react'
+import { useStore } from '../zustandState/useStore'
 
 const Timer = (props) => {
   const { initiateTimer, outOfTime, gameHasEnded } = props
 
-  const { setGameIsInProgress } = useContext(GameContext)
+  const setGameIsInProgress = useStore((state) => state.setGameIsInProgress)
   // set the timer - change value for seconds
   const [timer, setTimer] = useState(45)
 

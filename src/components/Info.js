@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
-import { GameContext } from '../context/GameContext'
+import React from 'react'
+import { useStore } from '../zustandState/useStore'
 
 const Info = (props) => {
   const { gameHasEnded, isOutOfTime } = props
 
-  const { gameIsInProgress } = useContext(GameContext)
+  const gameIsInProgress = useStore((state) => state.gameIsInProgress)
 
   const info =
     !gameIsInProgress && !isOutOfTime && !gameHasEnded
