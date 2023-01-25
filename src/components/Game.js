@@ -45,7 +45,7 @@ const Game = () => {
       <div className='h-screen pt-4 pb-8 xl:py-16 md:py-12 sm:py-8 w-9/10 xl:w:7/8 md:w-2/3 mx-auto flex flex-col'>
         <div className=''>
           <div className='px-3 flex items-center justify-between'>
-            <h1 className='text-2xl xl:text-6xl md:text-4xl sm:text-2xl inline-block'>
+            <h1 className='text-2xl xl:text-4xl md:text-4xl sm:text-2xl inline-block mr-8 font-bold'>
               Memory Game
             </h1>
             <Timer

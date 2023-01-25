@@ -1,15 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { shuffleCards } from '../helpers/ShuffleCards'
 
-const searchStrings = [
-  'colorful',
-  'abstract',
-  'insect',
-  'fluid',
-  'trippy',
-  'wildlife',
-  'cats',
-]
+const searchStrings = ['colorful', 'abstract', 'fluid', 'trippy', 'cats']
 
 export const useCards = (imageAmount) => {
   const [cards, setCards] = useState([])

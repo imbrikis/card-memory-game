@@ -30,12 +30,12 @@ const Timer = (props) => {
   }, [initiateTimer, timer, gameHasEnded, timesUp, setGameIsInProgress])
 
   return (
-    <div className='flex items-center pr-2 xl:pr-0'>
+    <div className='flex items-center justify-center pr-2 flex-grow'>
       <div className='inline-block text-base xl:text-4xl md:text-2xl sm:text-xl mr-2'>
         Time:
       </div>
       <h1
-        className={`inline-block w-10 text-xs text-center xl:text-4xl md:text-xl sm:text-lg bg-gray-200 px-1 xl:px-2 ${
+        className={`flex items-center justify-center inline-block w-24 text-xs text-center xl:text-2xl md:text-xl sm:text-lg bg-gray-200 px-1 xl:px-2 xl:h-16 ${
           initiateTimer ? 'text-black' : 'text-gray-400'
         }`}
       >
