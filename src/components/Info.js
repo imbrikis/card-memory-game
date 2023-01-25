@@ -4,7 +4,7 @@ import { useStore } from '../zustandState/useStore'
 const Info = (props) => {
   const { gameHasEnded, isOutOfTime } = props
 
-  const gameIsInProgress = useStore((state) => state.gameIsInProgress)
+  const gameIsInProgress = useStore(({ gameIsInProgress }) => gameIsInProgress)
 
   const info =
     !gameIsInProgress && !isOutOfTime && !gameHasEnded

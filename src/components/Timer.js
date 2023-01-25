@@ -4,7 +4,9 @@ import { useStore } from '../zustandState/useStore'
 const Timer = (props) => {
   const { initiateTimer, outOfTime, gameHasEnded } = props
 
-  const setGameIsInProgress = useStore((state) => state.setGameIsInProgress)
+  const setGameIsInProgress = useStore(
+    ({ setGameIsInProgress }) => setGameIsInProgress
+  )
   // set the timer - change value for seconds
   const [timer, setTimer] = useState(45)
 

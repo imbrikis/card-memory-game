@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useStore } from '../zustandState/useStore'
+import { shallow } from 'zustand/shallow'
 import Timer from './Timer'
 import Button from './Button'
 import CardsContainer from './CardsContainer'
@@ -11,7 +12,12 @@ const Game = () => {
   const [gameHasEnded, setGameHasEnded] = useState(false)
 
   const { fetchCards, numUniqueCards, setGameIsInProgress } = useStore(
-    (state) => state
+    ({ fetchCards, numUniqueCards, setGameIsInProgress }) => ({
+      fetchCards,
+      numUniqueCards,
+      setGameIsInProgress,
+    }),
+    shallow
   )
 
   const resetGame = () => {

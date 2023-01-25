@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
-import Card from './Card'
+import { shallow } from 'zustand/shallow'
 import { useStore } from '../zustandState/useStore'
+
+import Card from './Card'
 
 const CardsContainer = (props) => {
   const { endTheGame } = props
@@ -12,7 +14,24 @@ const CardsContainer = (props) => {
     numUniqueCards,
     setCards,
     setFlippedCards,
-  } = useStore((state) => state)
+  } = useStore(
+    ({
+      cards,
+      flippedCards,
+      gameIsInProgress,
+      numUniqueCards,
+      setCards,
+      setFlippedCards,
+    }) => ({
+      cards,
+      flippedCards,
+      gameIsInProgress,
+      numUniqueCards,
+      setCards,
+      setFlippedCards,
+    }),
+    shallow
+  )
 
   const cardsPlaceholder = []
 
@@ -84,7 +103,14 @@ const CardsContainer = (props) => {
         setTimeout(resetData, 500)
       }
     }
-  }, [flippedCards, endTheGame])
+  }, [
+    flippedCards,
+    endTheGame,
+    gameIsInProgress,
+    cards,
+    setFlippedCards,
+    setCards,
+  ])
 
   return (
     <div className='w-full flex-grow'>

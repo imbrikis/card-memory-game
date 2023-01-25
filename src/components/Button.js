@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { shallow } from 'zustand/shallow'
 import { useStore } from '../zustandState/useStore'
 
 const Button = (props) => {
@@ -12,11 +12,24 @@ const Button = (props) => {
     setFlippedCards,
     gameIsInProgress,
     setGameIsInProgress,
-  } = useStore((state) => {
-    console.log(state)
-    return state
-  })
-  // const { gameIsInProgress, setGameIsInProgress } = useContext(GameContext)
+  } = useStore(
+    ({
+      fetchCards,
+      fetchIsInFlight,
+      numUniqueCards,
+      setFlippedCards,
+      gameIsInProgress,
+      setGameIsInProgress,
+    }) => ({
+      fetchCards,
+      fetchIsInFlight,
+      numUniqueCards,
+      setFlippedCards,
+      gameIsInProgress,
+      setGameIsInProgress,
+    }),
+    shallow
+  )
 
   const handleClick = () => {
     if (fetchIsInFlight) return

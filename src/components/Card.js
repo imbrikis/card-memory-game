@@ -1,11 +1,25 @@
 import React from 'react'
+import { shallow } from 'zustand/shallow'
 import { useStore } from '../zustandState/useStore'
 
 const Card = (props) => {
   const { image, linkNum, hasBeenFlipped, index } = props
 
   const { flippedCards, gameIsInProgress, setCardsWithIndex, setFlippedCards } =
-    useStore((state) => state)
+    useStore(
+      ({
+        flippedCards,
+        gameIsInProgress,
+        setCardsWithIndex,
+        setFlippedCards,
+      }) => ({
+        flippedCards,
+        gameIsInProgress,
+        setCardsWithIndex,
+        setFlippedCards,
+      }),
+      shallow
+    )
 
   const handleClick = () => {
     if (gameIsInProgress && !hasBeenFlipped) {
