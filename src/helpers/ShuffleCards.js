@@ -14,17 +14,18 @@ export const shuffleCards = (cards) => {
   const extendedCards = [...cards, ...cards2]
 
   // add a key to each item in the array, as well as other metadata
-  extendedCards.forEach((card) => {
-    let randomNum = Math.floor(Math.random() * 1000000) + 1
-    card.key = randomNum
+  const uniqueCardId = Math.floor(Math.random() * 1000000) + 1
+
+  extendedCards.forEach((card, i) => {
+    card.key = uniqueCardId + i
     card.hasBeenFlipped = false
   })
 
   // shuffle the array
   for (let count = 0; count < cards.length; count++) {
-    let randomNum = Math.floor(Math.random() * extendedCards.length)
-    let tempItem = extendedCards[count]
-    let chosenItem = extendedCards[randomNum]
+    const randomNum = Math.floor(Math.random() * extendedCards.length)
+    const tempItem = extendedCards[count]
+    const chosenItem = extendedCards[randomNum]
     extendedCards[randomNum] = tempItem
     extendedCards[count] = chosenItem
   }

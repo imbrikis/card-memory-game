@@ -46,7 +46,7 @@ const Button = (props) => {
 
   return (
     <div
-      className={`inline-block px-2 w-36 h-10 xl:w-28 xl:h-12 xl:w-56 xl:h-16 md:w-48 md:h-12 sm:w-28 sm:h-12 rounded-xl text-xs xl:text-4xl md:text-2xl sm:text-sm flex justify-center items-center ${buttonClasses}`}
+      className={`inline-block px-2 w-36 h-10 xl:w-28 xl:h-12 xl:w-60 xl:h-16 md:w-48 md:h-12 sm:w-28 sm:h-12 rounded-xl text-xs xl:text-3xl md:text-2xl sm:text-sm flex justify-center items-center ${buttonClasses}`}
       onClick={handleClick}
     >
       {renderGameText()}
