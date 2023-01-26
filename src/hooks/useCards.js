@@ -7,7 +7,7 @@ export const useCards = (imageAmount) => {
   const [cards, setCards] = useState([])
   const [fetchIsInFlight, setFetchIsInFlight] = useState(true)
 
-  const setCardsWithIndex = useCallback(
+  const flipFaceUp = useCallback(
     (index) => {
       const cardsCopy = cards.map((card) => {
         return Object.assign({}, card)
@@ -46,5 +46,5 @@ export const useCards = (imageAmount) => {
     fetchCards()
   }, [fetchCards])
 
-  return { cards, fetchCards, fetchIsInFlight, setCards, setCardsWithIndex }
+  return { cards, fetchCards, fetchIsInFlight, setCards, flipFaceUp }
 }

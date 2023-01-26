@@ -14,23 +14,16 @@ const CardsContainer = (props) => {
 
   if (!cards || cards.length === 0) {
     for (let x = 0; x < numUniqueCards * 2; x++) {
+      const emptyCard = { image: '', linkNum: 0, hasBeenFlipped: false, key: 0 }
       cardsPlaceholder.push(
-        <Card key={Math.floor(Math.random() * 1000000) + 1} />
+        <Card key={Math.floor(Math.random() * 1000000) + 1} card={emptyCard} />
       )
     }
   }
 
   const renderedCards = cards
     ? cards.map((card, i) => {
-        return (
-          <Card
-            image={card.image}
-            linkNum={card.linkNum}
-            hasBeenFlipped={card.hasBeenFlipped}
-            key={card.key}
-            index={i}
-          />
-        )
+        return <Card card={card} key={card.key} index={i} />
       })
     : []
 
@@ -54,11 +47,11 @@ const CardsContainer = (props) => {
     // Check if 2 cards have been flipped
     if (flippedCards.length === 2) {
       // Check if flipped cards match
-      if (flippedCards[0] === flippedCards[1]) {
+      if (flippedCards[0].linkNum === flippedCards[1].linkNum) {
         // remove the cards from the temporary array
         // and leave them flipped in the permanent cards array
         setFlippedCards([])
-      } else if (flippedCards[0] !== flippedCards[1]) {
+      } else {
         // otherwise, make a copy of the cards array with the reverted changes
         // and push that to the cards array
         const cardsCopy = cards.map((card) => {
@@ -66,7 +59,7 @@ const CardsContainer = (props) => {
         })
         flippedCards.forEach((flippedCard) => {
           cardsCopy.forEach((card) => {
-            if (flippedCard === card.linkNum) {
+            if (flippedCard.linkNum === card.linkNum) {
               card.hasBeenFlipped = false
             }
           })
@@ -81,17 +74,17 @@ const CardsContainer = (props) => {
       }
     }
   }, [
+    cards,
     flippedCards,
     endTheGame,
     gameIsInProgress,
-    cards,
     setFlippedCards,
     setCards,
   ])
 
   return (
     <div className='w-full flex-grow'>
-      <div className='h-full mx-auto grid grid-cols-6 grid-rows-3'>
+      <div className='h-full mx-auto grid grid-cols-3 grid-rows-6 sm:grid-cols-6 sm:grid-rows-3'>
         {renderedData}
       </div>
     </div>

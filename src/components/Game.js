@@ -23,7 +23,7 @@ const Game = () => {
     setGameIsInProgress(true)
   }
 
-  const outOfTime = () => {
+  const timesUp = () => {
     setIsOutOfTime(true)
     setInitiateTimer(false)
     setGameHasEnded(true)
@@ -42,13 +42,15 @@ const Game = () => {
         gameHasEnded && 'bg-green bg-opacity-40'
       }`}
     >
-      <div className='h-screen py-16 w:7/8 md:w-2/3 mx-auto flex flex-col'>
+      <div className='h-screen pt-4 pb-8 xl:py-16 md:py-12 sm:py-8 w-9/10 xl:w:7/8 md:w-2/3 mx-auto flex flex-col'>
         <div className=''>
-          <div className='flex items-center justify-between'>
-            <h1 className='text-6xl inline-block'>Memory Game</h1>
+          <div className='px-3 flex items-center justify-between'>
+            <h1 className='text-2xl xl:text-4xl md:text-4xl sm:text-2xl inline-block mr-8 font-bold'>
+              Memory Game
+            </h1>
             <Timer
               initiateTimer={initiateTimer}
-              outOfTime={outOfTime}
+              timesUp={timesUp}
               gameHasEnded={gameHasEnded}
             />
             <Button
